@@ -545,10 +545,19 @@ a:hover {
     box-shadow: 0 4px 20px rgba(255, 153, 0, 0.4);
 }
 
-.skill-icon.azure {
-    background: linear-gradient(135deg, #0078D4, #0063b1);
-    box-shadow: 0 4px 20px rgba(0, 120, 212, 0.4);
+.skill-icon.azure{
+  width: 48px;               /* adjust */
+  height: 48px;              /* adjust */
+  border-radius: 12px;       /* if you want rounded */
+  background-image:
+    url("/assets/icons/azure.png"),
+    linear-gradient(135deg, #0078D4, #0063b1);
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-size: 70% 70%, cover;   /* tweak 70% */
+  box-shadow: 0 4px 20px rgba(0, 120, 212, 0.4);
 }
+
 
 .skill-icon.data {
     background: linear-gradient(135deg, var(--accent-cyan), #0099cc);
