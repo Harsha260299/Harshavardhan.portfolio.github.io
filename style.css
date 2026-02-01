@@ -138,27 +138,6 @@ button:focus-visible,
 }
 
 /* ========================================
-   SCROLL PROGRESS BAR
-   ======================================== */
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    z-index: 10000;
-    background: transparent;
-}
-
-.scroll-progress-bar {
-    height: 100%;
-    width: 0%;
-    background: var(--gradient-primary);
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-    transition: width 0.1s linear;
-}
-
-/* ========================================
    AMBIENT BACKGROUND
    ======================================== */
 .ambient-bg {
@@ -268,11 +247,6 @@ button:focus-visible,
     gap: 10px;
     font-weight: 700;
     font-size: 1.1rem;
-    transition: transform var(--transition-fast);
-}
-
-.logo:hover {
-    transform: scale(1.02);
 }
 
 .logo-icon {
@@ -1327,12 +1301,6 @@ button:focus-visible,
     object-fit: cover;
 }
 
-/* Visiting Card Container */
-.visiting-card-container {
-    position: relative;
-    perspective: 1000px;
-}
-
 /* Visiting Card */
 .visiting-card {
     position: relative;
@@ -1341,35 +1309,8 @@ button:focus-visible,
     border-radius: var(--radius-xl);
     overflow: hidden;
     transform-style: preserve-3d;
+    perspective: 1000px;
     transition: transform var(--transition-base);
-    opacity: 0;
-    transform: translateX(100px) rotateY(-15deg);
-}
-
-.visiting-card.revealed {
-    opacity: 1;
-    transform: translateX(0) rotateY(0);
-    animation: card-slide-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes card-slide-in {
-    0% {
-        opacity: 0;
-        transform: translateX(100px) rotateY(-15deg) scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0) rotateY(0) scale(1);
-    }
-}
-
-.visiting-card.floating {
-    animation: card-float 6s ease-in-out infinite;
-}
-
-@keyframes card-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
 }
 
 .card-shine {
@@ -1566,10 +1507,6 @@ button:focus-visible,
     background: #ea4335;
 }
 
-.social-link.teams:hover {
-    background: #6264a7;
-}
-
 .card-cta .btn-full {
     width: 100%;
 }
@@ -1733,24 +1670,13 @@ button:focus-visible,
     transform: translateY(0);
 }
 
-/* Custom delay support */
-.scroll-reveal[data-delay="0"] { transition-delay: 0s; }
-.scroll-reveal[data-delay="100"] { transition-delay: 0.1s; }
-.scroll-reveal[data-delay="200"] { transition-delay: 0.2s; }
-.scroll-reveal[data-delay="300"] { transition-delay: 0.3s; }
-.scroll-reveal[data-delay="400"] { transition-delay: 0.4s; }
-.scroll-reveal[data-delay="500"] { transition-delay: 0.5s; }
-
-/* ========================================
-   MAGNETIC EFFECT
-   ======================================== */
-.magnetic-element {
-    transition: transform 0.15s ease-out;
-}
-
-.magnetic-btn {
-    transition: transform 0.15s ease-out, box-shadow var(--transition-base), background var(--transition-base);
-}
+/* Stagger delays for children */
+.scroll-reveal:nth-child(1) { transition-delay: 0s; }
+.scroll-reveal:nth-child(2) { transition-delay: 0.1s; }
+.scroll-reveal:nth-child(3) { transition-delay: 0.2s; }
+.scroll-reveal:nth-child(4) { transition-delay: 0.3s; }
+.scroll-reveal:nth-child(5) { transition-delay: 0.4s; }
+.scroll-reveal:nth-child(6) { transition-delay: 0.5s; }
 
 /* ========================================
    RESPONSIVE DESIGN
@@ -1789,25 +1715,6 @@ button:focus-visible,
     
     .contact-photo-section {
         order: -1;
-    }
-    
-    .visiting-card {
-        transform: translateY(50px) !important;
-    }
-    
-    .visiting-card.revealed {
-        animation: card-slide-in-mobile 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-    
-    @keyframes card-slide-in-mobile {
-        0% {
-            opacity: 0;
-            transform: translateY(50px) scale(0.95);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
     }
 }
 
@@ -1910,18 +1817,9 @@ button:focus-visible,
     
     .visiting-card {
         transform: none !important;
-        animation: none !important;
-    }
-    
-    .visiting-card.floating {
-        animation: none !important;
     }
     
     .card-shine {
-        display: none;
-    }
-    
-    .scroll-progress {
         display: none;
     }
 }
@@ -1970,11 +1868,5 @@ button:focus-visible,
     .scroll-reveal {
         opacity: 1;
         transform: none;
-    }
-    
-    .visiting-card {
-        opacity: 1 !important;
-        transform: none !important;
-        animation: none !important;
     }
 }
