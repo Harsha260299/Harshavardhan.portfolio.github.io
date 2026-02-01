@@ -242,8 +242,4 @@ Consider adding:
 
 ---
 
-## 📞 Support
-
-If you need to customize further or have questions, the code is well-commented and organized into clear sections!
-
 **Enjoy your stunning new portfolio! 🎉**
