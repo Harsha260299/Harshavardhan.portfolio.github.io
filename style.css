@@ -523,9 +523,9 @@ a:hover {
 }
 
 .skill-icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 16px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
