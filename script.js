@@ -1,7 +1,7 @@
 /**
  * Premium Portfolio Interactivity
  * Modern, lightweight, and performance-focused JavaScript
- * Features: IntersectionObserver scroll reveals, 3D tilt effects, clipboard functionality
+ * Features: IntersectionObserver scroll reveals, 3D tilt effects, magnetic buttons, clipboard functionality
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,6 +32,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
     };
+
+    // ========================================
+    // SCROLL PROGRESS BAR
+    // ========================================
+    const progressBar = document.querySelector('.scroll-progress-bar');
+    
+    if (progressBar) {
+        const updateProgress = () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = `${progress}%`;
+        };
+
+        window.addEventListener('scroll', throttle(updateProgress, 16), { passive: true });
+    }
 
     // ========================================
     // NAVIGATION
@@ -130,7 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
+                const delay = entry.target.dataset.delay || 0;
+                setTimeout(() => {
+                    entry.target.classList.add('revealed');
+                }, delay);
                 revealObserver.unobserve(entry.target);
             }
         });
@@ -168,12 +187,88 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ========================================
+    // TEXT SCRAMBLE EFFECT
+    // ========================================
+    class TextScramble {
+        constructor(el) {
+            this.el = el;
+            this.chars = '!<>-_\\/[]{}—=+*^?#________';
+            this.update = this.update.bind(this);
+        }
+        
+        setText(newText) {
+            const oldText = this.el.innerText;
+            const length = Math.max(oldText.length, newText.length);
+            const promise = new Promise((resolve) => this.resolve = resolve);
+            this.queue = [];
+            
+            for (let i = 0; i < length; i++) {
+                const from = oldText[i] || '';
+                const to = newText[i] || '';
+                const start = Math.floor(Math.random() * 40);
+                const end = start + Math.floor(Math.random() * 40);
+                this.queue.push({ from, to, start, end });
+            }
+            
+            cancelAnimationFrame(this.frameRequest);
+            this.frame = 0;
+            this.update();
+            return promise;
+        }
+        
+        update() {
+            let output = '';
+            let complete = 0;
+            
+            for (let i = 0, n = this.queue.length; i < n; i++) {
+                let { from, to, start, end, char } = this.queue[i];
+                
+                if (this.frame >= end) {
+                    complete++;
+                    output += to;
+                } else if (this.frame >= start) {
+                    if (!char || Math.random() < 0.28) {
+                        char = this.randomChar();
+                        this.queue[i].char = char;
+                    }
+                    output += `<span class="scramble-char">${char}</span>`;
+                } else {
+                    output += from;
+                }
+            }
+            
+            this.el.innerHTML = output;
+            
+            if (complete === this.queue.length) {
+                this.resolve();
+            } else {
+                this.frameRequest = requestAnimationFrame(this.update);
+                this.frame++;
+            }
+        }
+        
+        randomChar() {
+            return this.chars[Math.floor(Math.random() * this.chars.length)];
+        }
+    }
+
+    // Initialize scramble effect
+    const scrambleEl = document.querySelector('.scramble-text');
+    if (scrambleEl) {
+        const fx = new TextScramble(scrambleEl);
+        const finalText = scrambleEl.dataset.value;
+        
+        setTimeout(() => {
+            fx.setText(finalText);
+        }, 500);
+    }
+
+    // ========================================
     // TYPEWRITER EFFECT
     // ========================================
     const typewriterElement = document.querySelector('.typewriter-text');
     
     if (typewriterElement) {
-        const text = typewriterElement.textContent;
         const roles = ['Cloud Data Engineer', 'AWS Specialist', 'Azure Expert', 'PySpark Developer'];
         let roleIndex = 0;
         let charIndex = 0;
@@ -195,18 +290,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!isDeleting && charIndex === currentRole.length) {
                 isDeleting = true;
-                typeSpeed = 2000; // Pause at end
+                typeSpeed = 2000;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 roleIndex = (roleIndex + 1) % roles.length;
-                typeSpeed = 500; // Pause before typing
+                typeSpeed = 500;
             }
 
             setTimeout(type, typeSpeed);
         };
 
-        // Start typing after initial delay
-        setTimeout(type, 1000);
+        setTimeout(type, 1500);
+    }
+
+    // ========================================
+    // COUNTER ANIMATION
+    // ========================================
+    const counters = document.querySelectorAll('.stat-number[data-count]');
+    
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.dataset.count);
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + '+';
+                    }
+                };
+                
+                updateCounter();
+                counterObserver.unobserve(counter);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => counterObserver.observe(counter));
+
+    // ========================================
+    // MAGNETIC EFFECT
+    // ========================================
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+    
+    if (!isTouchDevice) {
+        const magneticElements = document.querySelectorAll('.magnetic-element');
+        const magneticButtons = document.querySelectorAll('.magnetic-btn');
+        
+        const applyMagneticEffect = (element, strength = 0.3) => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                element.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translate(0, 0)';
+            });
+        };
+        
+        magneticElements.forEach(el => applyMagneticEffect(el, 0.2));
+        magneticButtons.forEach(btn => applyMagneticEffect(btn, 0.15));
     }
 
     // ========================================
@@ -214,8 +367,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================
     const visitingCard = document.getElementById('visiting-card');
     
-    if (visitingCard && window.matchMedia('(pointer: fine)').matches) {
-        const maxTilt = 8; // Maximum tilt angle in degrees
+    if (visitingCard && !isTouchDevice) {
+        const maxTilt = 8;
         
         const handleTilt = (e) => {
             const rect = visitingCard.getBoundingClientRect();
@@ -232,7 +385,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const resetTilt = () => {
-            visitingCard.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            if (!visitingCard.classList.contains('floating')) {
+                visitingCard.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            }
         };
 
         visitingCard.addEventListener('mousemove', throttle(handleTilt, 16));
@@ -240,17 +395,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ========================================
-    // FLOATING ANIMATION FOR VISITING CARD
+    // CARD REVEAL & FLOATING ANIMATION
     // ========================================
     if (visitingCard) {
         const cardObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    visitingCard.classList.add('card-visible');
-                    // Add subtle floating animation after reveal
+                    // Add revealed class for slide-in animation
                     setTimeout(() => {
-                        visitingCard.style.animation = 'card-float 6s ease-in-out infinite';
-                    }, 600);
+                        visitingCard.classList.add('revealed');
+                    }, 200);
+                    
+                    // Add floating animation after reveal
+                    setTimeout(() => {
+                        visitingCard.classList.add('floating');
+                    }, 1200);
+                    
                     cardObserver.unobserve(entry.target);
                 }
             });
@@ -258,16 +418,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         cardObserver.observe(visitingCard);
     }
-
-    // Add floating keyframes dynamically
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes card-float {
-            0%, 100% { transform: translateY(0) perspective(1000px) rotateX(0) rotateY(0); }
-            50% { transform: translateY(-10px) perspective(1000px) rotateX(0) rotateY(0); }
-        }
-    `;
-    document.head.appendChild(style);
 
     // ========================================
     // CLIPBOARD FUNCTIONALITY
@@ -295,7 +445,6 @@ document.addEventListener('DOMContentLoaded', () => {
             await navigator.clipboard.writeText(text);
             showToast('Copied to clipboard!');
         } catch (err) {
-            // Fallback for older browsers
             const textArea = document.createElement('textarea');
             textArea.value = text;
             textArea.style.position = 'fixed';
@@ -315,7 +464,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     copyableElements.forEach(el => {
-        // Click handler
         el.addEventListener('click', () => {
             const textToCopy = el.getAttribute('data-copy');
             if (textToCopy) {
@@ -323,7 +471,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Keyboard handler for accessibility
         el.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -381,7 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hero = document.querySelector('.hero');
     const heroVisual = document.querySelector('.hero-visual');
     
-    if (hero && heroVisual && window.matchMedia('(pointer: fine)').matches) {
+    if (hero && heroVisual && !isTouchDevice) {
         const handleParallax = () => {
             const scrolled = window.scrollY;
             const rate = scrolled * 0.3;
@@ -438,6 +585,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 opacity: 0;
             }
         }
+        .scramble-char {
+            color: var(--accent-cyan);
+        }
     `;
     document.head.appendChild(rippleStyle);
 
@@ -447,12 +597,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const timelineItems = document.querySelectorAll('.timeline-item');
     
     const timelineObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
+                const delay = entry.target.dataset.delay || 0;
                 setTimeout(() => {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateX(0)';
-                }, index * 150);
+                }, delay);
                 timelineObserver.unobserve(entry.target);
             }
         });
@@ -470,7 +621,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
-            // Pause expensive animations when tab is hidden
             document.body.classList.add('tab-hidden');
         } else {
             document.body.classList.remove('tab-hidden');
@@ -480,7 +630,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================
     // INITIALIZE
     // ========================================
-    // Trigger initial scroll handlers
     handleHeaderScroll();
     updateActiveNav();
     
