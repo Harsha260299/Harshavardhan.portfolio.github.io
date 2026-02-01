@@ -16,78 +16,159 @@
     <link rel="icon" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="assets/android-chrome-512x512.png">
     <link rel="manifest" href="assets/site.webmanifest">
-    <meta name="theme-color" content="#4da3ff">
+    <meta name="theme-color" content="#0a0e1a">
     
-    <!-- Load external font and icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/kTcIVgJX01cahJzKBUKwKEiY9nzkVIRvIb/gxOJ5/cTx4Li6BjN4kcxVtMN+Fnrxz8jNVv51vTLag==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <!-- Simple Icons for brand logos -->
-    <script src="https://unpkg.com/simple-icons@latest/icons.js"></script>
+    <!-- Modern Font Stack -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg" aria-hidden="true">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
     <!-- Site header with navigation -->
-    <header class="site-header">
+    <header class="site-header" id="site-header">
         <div class="container">
-            <div class="logo"><i class="fas fa-code"></i> Harshavardhan&nbsp;Thummala</div>
+            <a href="#" class="logo">
+                <span class="logo-icon"><i class="fas fa-code"></i></span>
+                <span class="logo-text">Harshavardhan<span class="logo-accent">.dev</span></span>
+            </a>
             <nav id="nav" class="nav">
                 <ul>
-                    <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-                    <li><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
-                    <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
-                    <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
-                    <li><a href="#certifications"><i class="fas fa-certificate"></i> Certifications</a></li>
-                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="#about" data-section="about"><span class="nav-indicator"></span>About</a></li>
+                    <li><a href="#skills" data-section="skills"><span class="nav-indicator"></span>Skills</a></li>
+                    <li><a href="#experience" data-section="experience"><span class="nav-indicator"></span>Experience</a></li>
+                    <li><a href="#education" data-section="education"><span class="nav-indicator"></span>Education</a></li>
+                    <li><a href="#certifications" data-section="certifications"><span class="nav-indicator"></span>Certifications</a></li>
+                    <li><a href="#contact" data-section="contact" class="nav-cta"><span class="nav-indicator"></span>Contact</a></li>
                 </ul>
             </nav>
-            <div class="nav-toggle" id="nav-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
         </div>
     </header>
 
-    <!-- Hero section with image and smoke effect -->
-    <section class="hero">
-        <!-- Animated smoke canvas -->
-        <canvas id="smoke-canvas" class="smoke-canvas" aria-hidden="true"></canvas>
+    <!-- Hero section with modern design -->
+    <section class="hero" id="hero">
+        <div class="hero-grid-pattern" aria-hidden="true"></div>
         <div class="container hero-content">
-            <div class="hero-image">
-                <img src="assets/profile.png" alt="Profile silhouette" width="280" height="280" loading="eager" decoding="sync" />
-                <div class="hero-image-ring"></div>
-            </div>
-            <div class="hero-text">
-                <h1>Hi, I'm <span class="accent">Harshavardhan</span></h1>
-                <h2><i class="fas fa-cloud"></i> Cloud Data Engineer</h2>
-                <p class="tagline"><i class="fas fa-rocket"></i> I design and build scalable, reliable, and secure data solutions across cloud platforms.</p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get In Touch</a>
-                    <a href="#skills" class="btn btn-secondary"><i class="fas fa-chart-line"></i> View Skills</a>
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-glow"></div>
+                    <div class="hero-image">
+                        <img src="assets/profile.png" alt="Harshavardhan Thummala - Cloud Data Engineer" width="320" height="320" loading="eager" decoding="sync" />
+                    </div>
+                    <div class="hero-image-ring ring-1"></div>
+                    <div class="hero-image-ring ring-2"></div>
                 </div>
             </div>
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Available for opportunities</span>
+                </div>
+                <h1>
+                    <span class="hero-greeting">Hi, I'm</span>
+                    <span class="hero-name">
+                        <span class="gradient-text">Harshavardhan</span>
+                    </span>
+                </h1>
+                <h2 class="hero-role">
+                    <span class="role-icon"><i class="fas fa-cloud"></i></span>
+                    <span class="typewriter-text">Cloud Data Engineer</span>
+                    <span class="cursor">|</span>
+                </h2>
+                <p class="tagline">I design and build scalable, reliable, and secure data solutions across cloud platforms. Transforming raw data into meaningful insights that drive business value.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <span class="btn-text">Get In Touch</span>
+                        <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+                    </a>
+                    <a href="#skills" class="btn btn-secondary">
+                        <span class="btn-text">View Skills</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">4+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Certifications</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">AWS</span>
+                        <span class="stat-label">& Azure</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-hint">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Scroll to explore</span>
         </div>
     </section>
 
     <!-- About section -->
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-user-circle"></i> About Me</h2>
-            <div class="about-content">
-                <div class="about-icon">
-                    <i class="fas fa-database"></i>
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">About Me</span>
+                <h2 class="section-title">Building Data Solutions<br/><span class="gradient-text">That Scale</span></h2>
+            </div>
+            <div class="about-content scroll-reveal">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="about-text">
+                        <p>
+                            I'm a data engineer with around four years of experience designing and building
+                            production‑grade data platforms. My background spans public clouds (AWS and Azure),
+                            distributed data processing with Spark/PySpark, and automation with serverless
+                            technologies. I'm passionate about turning raw data into meaningful insights and
+                            delivering robust pipelines that scale, remain secure and are easy to operate.
+                        </p>
+                        <p>
+                            Outside of building data solutions, I enjoy collaborating with cross‑functional teams,
+                            documenting designs and best practices, and continuously refining cost, performance
+                            and security to drive business value.
+                        </p>
+                    </div>
                 </div>
-                <div class="about-text">
-                    <p>
-                        I'm a data engineer with around four years of experience designing and building
-                        production‑grade data platforms. My background spans public clouds (AWS and Azure),
-                        distributed data processing with Spark/PySpark, and automation with serverless
-                        technologies. I'm passionate about turning raw data into meaningful insights and
-                        delivering robust pipelines that scale, remain secure and are easy to operate.
-                    </p>
-                    <p>
-                        Outside of building data solutions, I enjoy collaborating with cross‑functional teams,
-                        documenting designs and best practices, and continuously refining cost, performance
-                        and security to drive business value.
-                    </p>
+                <div class="about-highlights">
+                    <div class="highlight-item scroll-reveal">
+                        <div class="highlight-icon"><i class="fas fa-server"></i></div>
+                        <h4>Cloud Native</h4>
+                        <p>AWS & Azure expertise</p>
+                    </div>
+                    <div class="highlight-item scroll-reveal">
+                        <div class="highlight-icon"><i class="fas fa-bolt"></i></div>
+                        <h4>High Performance</h4>
+                        <p>Optimized data pipelines</p>
+                    </div>
+                    <div class="highlight-item scroll-reveal">
+                        <div class="highlight-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h4>Secure by Design</h4>
+                        <p>Enterprise-grade security</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,49 +177,94 @@
     <!-- Skills section -->
     <section id="skills" class="section alt">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-tools"></i> Technical Skills</h2>
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">Expertise</span>
+                <h2 class="section-title">Technical <span class="gradient-text">Skills</span></h2>
+            </div>
             <div class="skills-grid">
-                <div class="skill">
-                    <div class="skill-icon aws">
-                        <img src="assets/aws-icon.png" alt="AWS Logo" width="70" height="70" loading="lazy" decoding="async">
+                <div class="skill-card scroll-reveal" data-skill="aws">
+                    <div class="skill-glow"></div>
+                    <div class="skill-content">
+                        <div class="skill-icon">
+                            <img src="assets/aws-icon.png" alt="AWS Logo" width="60" height="60" loading="lazy" decoding="async">
+                        </div>
+                        <h3>AWS</h3>
+                        <p>S3, Lambda, Glue, Athena, Redshift, Kinesis Firehose, IAM, SNS/CloudWatch</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Serverless</span>
+                            <span class="skill-tag">Analytics</span>
+                        </div>
                     </div>
-                    <h3>AWS</h3>
-                    <p>S3, Lambda, Glue, Athena, Redshift, Kinesis Firehose, IAM, SNS/CloudWatch</p>
                 </div>
-                <div class="skill">
-                    <div class="skill-icon azure">
-                        <img src="assets/azure-icon.png" alt="Azure Logo" width="70" height="70" loading="lazy" decoding="async">
+                <div class="skill-card scroll-reveal" data-skill="azure">
+                    <div class="skill-glow"></div>
+                    <div class="skill-content">
+                        <div class="skill-icon">
+                            <img src="assets/azure-icon.png" alt="Azure Logo" width="60" height="60" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Azure</h3>
+                        <p>Databricks, ADLS Gen2, Unity Catalog, Synapse Analytics</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Lake</span>
+                            <span class="skill-tag">Warehousing</span>
+                        </div>
                     </div>
-                    <h3>Azure</h3>
-                    <p>Databricks, ADLS Gen2, Unity Catalog, Synapse Analytics</p>
                 </div>
-                <div class="skill">
-                    <div class="skill-icon data">
-                        <img src="assets/data-icon.png" alt="Data Processing Icon" width="70" height="70" loading="lazy" decoding="async">
+                <div class="skill-card scroll-reveal" data-skill="data">
+                    <div class="skill-glow"></div>
+                    <div class="skill-content">
+                        <div class="skill-icon">
+                            <img src="assets/data-icon.png" alt="Data Processing Icon" width="60" height="60" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Data Processing</h3>
+                        <p>Apache Spark/PySpark, Python, SQL, Data Warehousing (Star Schema)</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">ETL/ELT</span>
+                            <span class="skill-tag">Modeling</span>
+                        </div>
                     </div>
-                    <h3>Data Processing</h3>
-                    <p>Apache Spark/PySpark, Python, SQL, Data Warehousing (Star Schema)</p>
                 </div>
-                <div class="skill">
-                    <div class="skill-icon ops">
-                        <img src="assets/operations-icon.png" alt="Operations Icon" width="70" height="70" loading="lazy" decoding="async">
+                <div class="skill-card scroll-reveal" data-skill="ops">
+                    <div class="skill-glow"></div>
+                    <div class="skill-content">
+                        <div class="skill-icon">
+                            <img src="assets/operations-icon.png" alt="Operations Icon" width="60" height="60" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Operations</h3>
+                        <p>Monitoring & alerting, cost optimisation, IAM & access controls</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">DevOps</span>
+                            <span class="skill-tag">Security</span>
+                        </div>
                     </div>
-                    <h3>Operations</h3>
-                    <p>Monitoring & alerting, cost optimisation, IAM & access controls</p>
                 </div>
-                <div class="skill">
-                    <div class="skill-icon soft">
-                        <img src="assets/softskills-icon.png" alt="Soft Skills Icon" width="70" height="70" loading="lazy" decoding="async">
+                <div class="skill-card scroll-reveal" data-skill="soft">
+                    <div class="skill-glow"></div>
+                    <div class="skill-content">
+                        <div class="skill-icon">
+                            <img src="assets/softskills-icon.png" alt="Soft Skills Icon" width="60" height="60" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Soft Skills</h3>
+                        <p>Team collaboration, strategic thinking, problem solving, adaptability, Agile</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Leadership</span>
+                            <span class="skill-tag">Agile</span>
+                        </div>
                     </div>
-                    <h3>Soft Skills</h3>
-                    <p>Team collaboration, strategic thinking, problem solving, adaptability, Agile</p>
                 </div>
-                <div class="skill">
-                    <div class="skill-icon tools">
-                        <img src="assets/tools-icon.png" alt="Tools Icon" width="70" height="70" loading="lazy" decoding="async">
+                <div class="skill-card scroll-reveal" data-skill="tools">
+                    <div class="skill-glow"></div>
+                    <div class="skill-content">
+                        <div class="skill-icon">
+                            <img src="assets/tools-icon.png" alt="Tools Icon" width="60" height="60" loading="lazy" decoding="async">
+                        </div>
+                        <h3>Tools</h3>
+                        <p>Git, Docker, Power BI</p>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Version Control</span>
+                            <span class="skill-tag">Visualization</span>
+                        </div>
                     </div>
-                    <h3>Tools</h3>
-                    <p>Git, Docker, Power BI</p>
                 </div>
             </div>
         </div>
@@ -147,46 +273,75 @@
     <!-- Experience section -->
     <section id="experience" class="section">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">Career</span>
+                <h2 class="section-title">Professional <span class="gradient-text">Experience</span></h2>
+            </div>
             <div class="timeline">
                 <!-- Role 1 -->
-                <div class="timeline-item">
-                    <div class="timeline-icon"><i class="fas fa-server"></i></div>
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
                     <div class="timeline-content">
-                        <h3><i class="fab fa-aws"></i> Assistant System Engineer – Ericsson @ Tata Consultancy Services</h3>
-                        <span class="period">Jul 2023 – Present</span>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Designed and delivered a serverless analytics platform to ingest and process SMTP logs using Kinesis Firehose, S3 and AWS Glue.</li>
-                            <li><i class="fas fa-check-circle"></i> Optimised storage layout (partitioned Parquet) to reduce Athena scan cost and accelerate queries; integrated reporting with Power BI.</li>
-                            <li><i class="fas fa-check-circle"></i> Built a proof‑of‑concept pipeline that migrated daily MySQL extracts and semi‑structured logs to S3, normalised data via Lambda and curated datasets in Redshift.</li>
-                            <li><i class="fas fa-check-circle"></i> Developed a M365 license analytics pipeline in Azure Databricks using Auto Loader and the Medallion architecture.</li>
-                            <li><i class="fas fa-check-circle"></i> Implemented proactive credential‑expiry alerts and operational dashboards to ensure continuous pipeline operation.</li>
+                        <div class="timeline-header">
+                            <div class="timeline-company">
+                                <i class="fab fa-aws"></i>
+                                <span>Ericsson @ Tata Consultancy Services</span>
+                            </div>
+                            <span class="timeline-period">Jul 2023 – Present</span>
+                        </div>
+                        <h3 class="timeline-role">Assistant System Engineer</h3>
+                        <ul class="timeline-achievements">
+                            <li><span class="achievement-dot"></span>Designed and delivered a serverless analytics platform to ingest and process SMTP logs using Kinesis Firehose, S3 and AWS Glue.</li>
+                            <li><span class="achievement-dot"></span>Optimised storage layout (partitioned Parquet) to reduce Athena scan cost and accelerate queries; integrated reporting with Power BI.</li>
+                            <li><span class="achievement-dot"></span>Built a proof‑of‑concept pipeline that migrated daily MySQL extracts and semi‑structured logs to S3, normalised data via Lambda and curated datasets in Redshift.</li>
+                            <li><span class="achievement-dot"></span>Developed a M365 license analytics pipeline in Azure Databricks using Auto Loader and the Medallion architecture.</li>
+                            <li><span class="achievement-dot"></span>Implemented proactive credential‑expiry alerts and operational dashboards to ensure continuous pipeline operation.</li>
                         </ul>
                     </div>
                 </div>
                 <!-- Role 2 -->
-                <div class="timeline-item">
-                    <div class="timeline-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                        <div class="marker-line"></div>
+                    </div>
                     <div class="timeline-content">
-                        <h3><i class="fas fa-building"></i> Assistant System Engineer – UBS @ Tata Consultancy Services</h3>
-                        <span class="period">Mar 2023 – Jul 2023</span>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Built a migration tracking dashboard in Power BI using SharePoint data sources to visualise project progress and adoption metrics.</li>
-                            <li><i class="fas fa-check-circle"></i> Led hypercare support for M365 migrations, triaging issues and ensuring zero SLA breaches.</li>
-                            <li><i class="fas fa-check-circle"></i> Provided post‑migration support by coordinating with technical teams and closing incidents within SLA.</li>
+                        <div class="timeline-header">
+                            <div class="timeline-company">
+                                <i class="fas fa-building"></i>
+                                <span>UBS @ Tata Consultancy Services</span>
+                            </div>
+                            <span class="timeline-period">Mar 2023 – Jul 2023</span>
+                        </div>
+                        <h3 class="timeline-role">Assistant System Engineer</h3>
+                        <ul class="timeline-achievements">
+                            <li><span class="achievement-dot"></span>Built a migration tracking dashboard in Power BI using SharePoint data sources to visualise project progress and adoption metrics.</li>
+                            <li><span class="achievement-dot"></span>Led hypercare support for M365 migrations, triaging issues and ensuring zero SLA breaches.</li>
+                            <li><span class="achievement-dot"></span>Provided post‑migration support by coordinating with technical teams and closing incidents within SLA.</li>
                         </ul>
                     </div>
                 </div>
                 <!-- Role 3 -->
-                <div class="timeline-item">
-                    <div class="timeline-icon"><i class="fas fa-file-contract"></i></div>
+                <div class="timeline-item scroll-reveal">
+                    <div class="timeline-marker">
+                        <div class="marker-dot"></div>
+                    </div>
                     <div class="timeline-content">
-                        <h3><i class="fas fa-university"></i> Assistant System Engineer – Credit Suisse @ Tata Consultancy Services</h3>
-                        <span class="period">Feb 2022 – Mar 2023</span>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Developed migration tracking dashboards in Power BI to monitor rollout progress and user adoption.</li>
-                            <li><i class="fas fa-check-circle"></i> Generated weekly/monthly reports summarising ticket volumes and support performance.</li>
-                            <li><i class="fas fa-check-circle"></i> Delivered post‑migration support and troubleshooting, maintaining service reliability.</li>
+                        <div class="timeline-header">
+                            <div class="timeline-company">
+                                <i class="fas fa-university"></i>
+                                <span>Credit Suisse @ Tata Consultancy Services</span>
+                            </div>
+                            <span class="timeline-period">Feb 2022 – Mar 2023</span>
+                        </div>
+                        <h3 class="timeline-role">Assistant System Engineer</h3>
+                        <ul class="timeline-achievements">
+                            <li><span class="achievement-dot"></span>Developed migration tracking dashboards in Power BI to monitor rollout progress and user adoption.</li>
+                            <li><span class="achievement-dot"></span>Generated weekly/monthly reports summarising ticket volumes and support performance.</li>
+                            <li><span class="achievement-dot"></span>Delivered post‑migration support and troubleshooting, maintaining service reliability.</li>
                         </ul>
                     </div>
                 </div>
@@ -197,15 +352,21 @@
     <!-- Education section -->
     <section id="education" class="section alt">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
-            <div class="education-item">
-                <div class="education-icon">
-                    <i class="fas fa-university"></i>
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">Background</span>
+                <h2 class="section-title">Education & <span class="gradient-text">Learning</span></h2>
+            </div>
+            <div class="education-card scroll-reveal">
+                <div class="education-visual">
+                    <div class="education-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="education-year">2016 – 2020</div>
                 </div>
-                <div class="education-text">
+                <div class="education-content">
                     <h3>Bachelor of Technology in Mechanical Engineering</h3>
-                    <span class="period">2016 – 2020</span>
-                    <p>Jawaharlal Nehru Technological University, Anantapur (JNTU A)</p>
+                    <p class="education-institution">Jawaharlal Nehru Technological University, Anantapur (JNTU A)</p>
+                    <p class="education-description">Built a strong foundation in analytical thinking, problem-solving, and systematic approaches that translate seamlessly into data engineering and software development.</p>
                 </div>
             </div>
         </div>
@@ -214,82 +375,205 @@
     <!-- Certifications section -->
     <section id="certifications" class="section">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-certificate"></i> Certifications</h2>
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">Credentials</span>
+                <h2 class="section-title">Professional <span class="gradient-text">Certifications</span></h2>
+            </div>
             <div class="cert-grid">
-                <a class="cert-item aws-cert" href="https://www.credly.com/badges/78ee3760-62da-42a7-a5e5-7b65a08adac9/public_url" target="_blank" rel="noopener">
-                    <i class="fab fa-aws"></i>
-                    <span>AWS Certified Data Engineer – Associate</span>
-                    <i class="fas fa-external-link-alt external-icon"></i>
+                <a class="cert-card scroll-reveal aws-cert" href="https://www.credly.com/badges/78ee3760-62da-42a7-a5e5-7b65a08adac9/public_url" target="_blank" rel="noopener">
+                    <div class="cert-glow"></div>
+                    <div class="cert-content">
+                        <div class="cert-icon"><i class="fab fa-aws"></i></div>
+                        <div class="cert-info">
+                            <span class="cert-title">AWS Certified Data Engineer – Associate</span>
+                            <span class="cert-provider">Amazon Web Services</span>
+                        </div>
+                        <div class="cert-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                    </div>
                 </a>
-                <a class="cert-item snowflake-cert" href="https://achieve.snowflake.com/2dc5d9b7-ff47-47d1-a2d0-0a54cb5499ce#acc.xDnJepWl" target="_blank" rel="noopener">
-                    <i class="fas fa-snowflake"></i>
-                    <span>Snowflake SnowPro Core Certified</span>
-                    <i class="fas fa-external-link-alt external-icon"></i>
+                <a class="cert-card scroll-reveal snowflake-cert" href="https://achieve.snowflake.com/2dc5d9b7-ff47-47d1-a2d0-0a54cb5499ce#acc.xDnJepWl" target="_blank" rel="noopener">
+                    <div class="cert-glow"></div>
+                    <div class="cert-content">
+                        <div class="cert-icon"><i class="fas fa-snowflake"></i></div>
+                        <div class="cert-info">
+                            <span class="cert-title">Snowflake SnowPro Core Certified</span>
+                            <span class="cert-provider">Snowflake</span>
+                        </div>
+                        <div class="cert-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                    </div>
                 </a>
-                <a class="cert-item microsoft-cert" href="https://learn.microsoft.com/en-us/users/harshavardhanthummala-3194/credentials/cb6933beb2fd9a9c" target="_blank" rel="noopener">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Microsoft Certified: Data Scientist Associate</span>
-                    <i class="fas fa-external-link-alt external-icon"></i>
+                <a class="cert-card scroll-reveal microsoft-cert" href="https://learn.microsoft.com/en-us/users/harshavardhanthummala-3194/credentials/cb6933beb2fd9a9c" target="_blank" rel="noopener">
+                    <div class="cert-glow"></div>
+                    <div class="cert-content">
+                        <div class="cert-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="cert-info">
+                            <span class="cert-title">Microsoft Certified: Data Scientist Associate</span>
+                            <span class="cert-provider">Microsoft</span>
+                        </div>
+                        <div class="cert-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                    </div>
                 </a>
-                <a class="cert-item microsoft-cert" href="https://learn.microsoft.com/api/credentials/share/en-gb/HarshavardhanThummala-3194/93E5EFCB7C4303B2?sharingId=A3DAF97E2652598E" target="_blank" rel="noopener">
-                    <i class="fas fa-layer-group"></i>
-                    <span>Microsoft Certified: Fabric Data Engineer Associate</span>
-                    <i class="fas fa-external-link-alt external-icon"></i>
+                <a class="cert-card scroll-reveal microsoft-cert" href="https://learn.microsoft.com/api/credentials/share/en-gb/HarshavardhanThummala-3194/93E5EFCB7C4303B2?sharingId=A3DAF97E2652598E" target="_blank" rel="noopener">
+                    <div class="cert-glow"></div>
+                    <div class="cert-content">
+                        <div class="cert-icon"><i class="fas fa-layer-group"></i></div>
+                        <div class="cert-info">
+                            <span class="cert-title">Microsoft Certified: Fabric Data Engineer Associate</span>
+                            <span class="cert-provider">Microsoft</span>
+                        </div>
+                        <div class="cert-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                    </div>
                 </a>
-                <a class="cert-item microsoft-cert" href="https://learn.microsoft.com/en-us/users/harshavardhanthummala-3194/credentials/certification/azure-data-fundamentals?tab=credentials-tab" target="_blank" rel="noopener">
-                    <i class="fas fa-database"></i>
-                    <span>Microsoft Certified: Azure Data Fundamentals</span>
-                    <i class="fas fa-external-link-alt external-icon"></i>
+                <a class="cert-card scroll-reveal microsoft-cert" href="https://learn.microsoft.com/en-us/users/harshavardhanthummala-3194/credentials/certification/azure-data-fundamentals?tab=credentials-tab" target="_blank" rel="noopener">
+                    <div class="cert-glow"></div>
+                    <div class="cert-content">
+                        <div class="cert-icon"><i class="fas fa-database"></i></div>
+                        <div class="cert-info">
+                            <span class="cert-title">Microsoft Certified: Azure Data Fundamentals</span>
+                            <span class="cert-provider">Microsoft</span>
+                        </div>
+                        <div class="cert-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                    </div>
                 </a>
-                <a class="cert-item microsoft-cert" href="https://learn.microsoft.com/en-us/users/harshavardhanthummala-3194/credentials/certification/microsoft-365-fundamentals?tab=credentials-tab" target="_blank" rel="noopener">
-                    <i class="fab fa-microsoft"></i>
-                    <span>Microsoft 365 Certified: Fundamentals</span>
-                    <i class="fas fa-external-link-alt external-icon"></i>
+                <a class="cert-card scroll-reveal microsoft-cert" href="https://learn.microsoft.com/en-us/users/harshavardhanthummala-3194/credentials/certification/microsoft-365-fundamentals?tab=credentials-tab" target="_blank" rel="noopener">
+                    <div class="cert-glow"></div>
+                    <div class="cert-content">
+                        <div class="cert-icon"><i class="fab fa-microsoft"></i></div>
+                        <div class="cert-info">
+                            <span class="cert-title">Microsoft 365 Certified: Fundamentals</span>
+                            <span class="cert-provider">Microsoft</span>
+                        </div>
+                        <div class="cert-arrow"><i class="fas fa-arrow-up-right-from-square"></i></div>
+                    </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Contact section -->
+    <!-- Contact section - Digital Visiting Card -->
     <section id="contact" class="section alt">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-envelope"></i> Contact</h2>
-            <p>If you'd like to discuss a project or just want to say hello, feel free to reach out!</p>
-            <div class="contact-info">
-                <a href="tel:+918247596553" class="contact-item">
-                    <i class="fas fa-phone-alt"></i>
-                    <div>
-                        <span>Phone</span>
-                        <p>+91 82475 96553</p>
-                    </div>
-                </a>
-                <a href="/cdn-cgi/l/email-protection#087c60697a7b60697e697a6c6069663e393b486f65696164266b6765" class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <span>Email</span>
-                        <p><span class="__cf_email__" data-cfemail="47332f2635342f26312635232f262971767407202a262e2b6924282a">[email&#160;protected]</span></p>
-                    </div>
-                </a>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <div>
-                        <span>Location</span>
-                        <p>Tirupati, Andhra Pradesh, India</p>
+            <div class="section-header scroll-reveal">
+                <span class="section-tag">Connect</span>
+                <h2 class="section-title">Let's Work <span class="gradient-text">Together</span></h2>
+            </div>
+            
+            <div class="contact-wrapper">
+                <!-- Left: Photo -->
+                <div class="contact-photo-section scroll-reveal">
+                    <div class="contact-photo-wrapper">
+                        <div class="contact-photo-glow"></div>
+                        <div class="contact-photo">
+                            <img src="assets/profile.png" alt="Harshavardhan Thummala" width="280" height="280" loading="lazy" decoding="async" />
+                        </div>
                     </div>
                 </div>
-                <a href="https://linkedin.com" target="_blank" class="contact-item">
-                    <i class="fab fa-linkedin"></i>
-                    <div>
-                        <span>LinkedIn</span>
-                        <p>linkedin.com/in/me</p>
+                
+                <!-- Right: Digital Visiting Card -->
+                <div class="visiting-card scroll-reveal" id="visiting-card">
+                    <div class="card-shine"></div>
+                    <div class="card-border"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <div class="card-avatar">
+                                <span>HT</span>
+                            </div>
+                            <div class="card-title">
+                                <h3>Harshavardhan Thummala</h3>
+                                <span class="card-role">Cloud Data Engineer</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-divider"></div>
+                        
+                        <div class="card-details">
+                            <div class="card-detail" data-copy="Tirupati, Andhra Pradesh, India">
+                                <div class="detail-icon"><i class="fas fa-location-dot"></i></div>
+                                <div class="detail-text">
+                                    <span class="detail-label">Location</span>
+                                    <span class="detail-value">Tirupati, Andhra Pradesh, India</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card-detail clickable" data-copy="tharshavardhan613@gmail.com" tabindex="0" role="button" aria-label="Copy email address">
+                                <div class="detail-icon"><i class="fas fa-envelope"></i></div>
+                                <div class="detail-text">
+                                    <span class="detail-label">Email</span>
+                                    <span class="detail-value">tharshavardhan613@gmail.com</span>
+                                </div>
+                                <div class="copy-hint"><i class="fas fa-copy"></i></div>
+                            </div>
+                            
+                            <div class="card-detail clickable" data-copy="+91 82475 96553" tabindex="0" role="button" aria-label="Copy phone number">
+                                <div class="detail-icon"><i class="fas fa-phone"></i></div>
+                                <div class="detail-text">
+                                    <span class="detail-label">Phone</span>
+                                    <span class="detail-value">+91 82475 96553</span>
+                                </div>
+                                <div class="copy-hint"><i class="fas fa-copy"></i></div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-social">
+                            <a href="https://www.linkedin.com/in/harshavardhan26/" target="_blank" rel="noopener" class="social-link linkedin" aria-label="LinkedIn Profile">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/harshavardhan" target="_blank" rel="noopener" class="social-link github" aria-label="GitHub Profile">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="mailto:tharshavardhan613@gmail.com" class="social-link email" aria-label="Send Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://teams.microsoft.com/l/call/0/0?users=tharshavardhan613@gmail.com" target="_blank" rel="noopener" class="social-link teams" aria-label="Start Teams Call">
+                                <i class="fas fa-video"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="card-cta">
+                            <a href="tel:+918247596553" class="btn btn-primary btn-full">
+                                <span class="btn-text">Schedule a Call</span>
+                                <span class="btn-icon"><i class="fas fa-phone"></i></span>
+                            </a>
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <div class="toast-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="toast-message">Copied to clipboard!</div>
+    </div>
 
     <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; <span id="year"></span> Harshavardhan Thummala. All rights reserved.</p>
-            <p class="footer-credits"><i c
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon"><i class="fas fa-code"></i></span>
+                    <span>Harshavardhan Thummala</span>
+                </div>
+                <p class="footer-tagline">Building data solutions that scale</p>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/harshavardhan26/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/harshavardhan" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="mailto:tharshavardhan613@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> Harshavardhan Thummala. All rights reserved.</p>
+                <p class="footer-credits">Crafted with <i class="fas fa-heart"></i> and lots of <i class="fas fa-coffee"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
